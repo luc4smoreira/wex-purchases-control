@@ -24,8 +24,8 @@ public class TreasureGovExchangeRateServiceImp implements CurrencyExchangeRateSe
 
     private final RestTemplate restTemplate;
     @Autowired
-    public TreasureGovExchangeRateServiceImp(RestTemplateBuilder builder) {
-        this.restTemplate = builder.build();
+    public TreasureGovExchangeRateServiceImp(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
     }
 
     private URI buildExchangeRateUrl(String country, String currency, DateIntervalDTO intervalDTO) {
