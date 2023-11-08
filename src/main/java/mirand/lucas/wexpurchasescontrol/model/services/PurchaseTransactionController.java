@@ -14,7 +14,7 @@ public interface PurchaseTransactionController {
      * @param purchaseDTO Information associated with the purchase in USD
      * @return Unique identifier: must uniquely identify the purchase
      */
-    Long storePurchase(PurchaseDTO purchaseDTO);
+    Long storePurchase(final PurchaseDTO purchaseDTO);
 
     /**
      *
@@ -25,5 +25,5 @@ public interface PurchaseTransactionController {
      * @throws CurrencyExchangeNotAvailableException the currency exchange rate is not avaliable for some reason
      * @throws PurchaseNotFoundException  the purchase id wasn´t found in the database
      */
-    PurchaseWithCurrencyExchangeDTO getPurchaseByIdInCurrency(Long id, String currency) throws CurrencyExchangeNotAvailableException, PurchaseNotFoundException;
+    PurchaseWithCurrencyExchangeDTO getPurchaseByIdInCurrency(final Long id, final String currency) throws CurrencyExchangeNotAvailableException, PurchaseNotFoundException;
 }
