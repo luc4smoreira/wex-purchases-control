@@ -7,9 +7,10 @@ import java.math.BigDecimal;
 /**
  * Purchase with stored id, converted to a specific currency
  */
-public class PurchaseWithCurrencyExchangeDTO extends PurchaseDTO {
+public class ExchangedPurchaseDTO extends PurchaseDTO {
 
     private Long id;
+    @Positive
     private BigDecimal exchangeRate;
     @Positive
     private BigDecimal convertedAmout;
