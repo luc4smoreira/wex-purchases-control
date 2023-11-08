@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class PurchaseTransactionController {
 
 
-    private PurchaseTransactionService purchaseService;
+    private final PurchaseTransactionService purchaseService;
 
     @Autowired
     public PurchaseTransactionController(PurchaseTransactionService service){
