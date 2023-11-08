@@ -21,11 +21,13 @@ public class PurchaseTransactionController {
 
     @PostMapping("/store")
     public Long createPurchase(@Valid @RequestBody PurchaseDTO purchaseDTO) {
+        //TODO validate purchase with this requirement: Purchase amount: must be a valid positive amount rounded to the nearest cent
         return purchaseService.storePurchase(purchaseDTO);
     }
 
     @GetMapping("/get")
     public ExchangedPurchaseDTO getPurchase(@RequestParam(value = "id") Long id, @RequestParam(value = "country") String country, @RequestParam(value = "currency") String currency) {
+        //TODO If no currency conversion rate is available within 6 months equal to or before the purchase date, an error should be returned stating the purchase cannot be converted to the target currency.
         return purchaseService.getPurchaseByIdInCurrency(id, country, currency);
 
     }
