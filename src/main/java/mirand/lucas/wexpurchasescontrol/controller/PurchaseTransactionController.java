@@ -28,6 +28,7 @@ public class PurchaseTransactionController {
     }
 
     @GetMapping("/get")
+    @ResponseStatus(HttpStatus.OK)
     public ExchangedPurchaseDTO getPurchase(
             @RequestParam(value = "id") @NotNull Long id,
             @RequestParam(value = "country", required = false) String country,
