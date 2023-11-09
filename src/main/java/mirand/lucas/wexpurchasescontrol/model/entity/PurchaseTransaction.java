@@ -24,7 +24,7 @@ public class PurchaseTransaction {
 
     private String description;
     private LocalDate transactionDate;
-    private BigDecimal purchaseAmount;
+    private BigDecimal purchaseAmountUSD;
 
     public String getDescription() {
         return description;
@@ -42,12 +42,12 @@ public class PurchaseTransaction {
         this.transactionDate = transactionDate;
     }
 
-    public BigDecimal getPurchaseAmount() {
-        return purchaseAmount;
+    public BigDecimal getPurchaseAmountUSD() {
+        return purchaseAmountUSD;
     }
 
-    public void setPurchaseAmount(BigDecimal purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
+    public void setPurchaseAmountUSD(BigDecimal purchaseAmount) {
+        this.purchaseAmountUSD = purchaseAmount;
     }
 
     public Long getId() {

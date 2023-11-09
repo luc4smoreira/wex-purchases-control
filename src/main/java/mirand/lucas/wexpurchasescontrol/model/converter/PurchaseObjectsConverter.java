@@ -15,7 +15,7 @@ public class PurchaseObjectsConverter {
         PurchaseTransaction purchaseTransaction = new PurchaseTransaction();
 
 
-        purchaseTransaction.setPurchaseAmount(purchaseDTO.getPurchaseAmount());
+        purchaseTransaction.setPurchaseAmountUSD(purchaseDTO.getPurchaseAmountUSD());
         purchaseTransaction.setDescription(purchaseDTO.getDescription());
         purchaseTransaction.setTransactionDate(purchaseDTO.getTransactionDate());
 
@@ -27,7 +27,7 @@ public class PurchaseObjectsConverter {
         exchangedPurchaseDTO.setId(purchaseTransaction.getId());
         exchangedPurchaseDTO.setDescription(purchaseTransaction.getDescription());
         exchangedPurchaseDTO.setTransactionDate(purchaseTransaction.getTransactionDate());
-        exchangedPurchaseDTO.setPurchaseAmount(purchaseTransaction.getPurchaseAmount());
+        exchangedPurchaseDTO.setPurchaseAmountUSD(purchaseTransaction.getPurchaseAmountUSD());
         return exchangedPurchaseDTO;
 
     }

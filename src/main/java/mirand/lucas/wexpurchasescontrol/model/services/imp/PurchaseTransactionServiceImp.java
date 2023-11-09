@@ -59,7 +59,7 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
             //set the exchage rate
             exchangedPurchaseDTO.setExchangeRate(rate);
 
-            BigDecimal exchanged = exchangeAndRoundAmount(storedPurchase.getPurchaseAmount(), rate);
+            BigDecimal exchanged = exchangeAndRoundAmount(storedPurchase.getPurchaseAmountUSD(), rate);
 
             exchangedPurchaseDTO.setConvertedAmout(exchanged);
         }
@@ -72,6 +72,6 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
     @Override
     public BigDecimal exchangeAndRoundAmount(BigDecimal amount, BigDecimal exchangeRate) {
        //TODO The converted purchase amount to the target currency should be rounded to two decimal places (i.e., cent).
-       return amount.multiply(exchangeRate);
+       return amount.multiply(exchangeRate).setScale(TOTAL_DECIMALS_FOR_CENTS);
     }
 }
