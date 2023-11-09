@@ -49,12 +49,15 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
         //first, get the purchase from database
         PurchaseTransaction storedPurchase = purchaseRepository.getReferenceById(id);
 
-        //then, get the date interval to get the currency
-        DateIntervalDTO dateIntervalDTO = currencyExchangeRateService.generateAcceptableInterval(storedPurchase.getTransactionDate());
+
 
         ExchangedPurchaseDTO exchangedPurchaseDTO = PurchaseObjectsConverter.fromEntity(storedPurchase);
 
         if(country != null && currency!=null) {
+
+            //then, get the date interval to get the currency
+            DateIntervalDTO dateIntervalDTO = currencyExchangeRateService.generateAcceptableInterval(storedPurchase.getTransactionDate());
+
             //get the exchange rate for the defined country and currency using am acceptable interval for this rate
             BigDecimal rate = currencyExchangeRateService.getNewestExchangeRateInInterval(country, currency, dateIntervalDTO);
             if(rate==null) {
