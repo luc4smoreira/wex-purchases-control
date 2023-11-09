@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Service
 public class PurchaseTransactionServiceImp implements PurchaseTransactionService {
 
@@ -75,7 +77,7 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
 
     @Override
     public BigDecimal exchangeAndRoundAmount(BigDecimal amount, BigDecimal exchangeRate) {
-       //TODO The converted purchase amount to the target currency should be rounded to two decimal places (i.e., cent).
-       return amount.multiply(exchangeRate).setScale(TOTAL_DECIMALS_FOR_CENTS);
+       //The converted purchase amount to the target currency should be rounded to two decimal places (i.e., cent).
+       return amount.multiply(exchangeRate).setScale(TOTAL_DECIMALS_FOR_CENTS, RoundingMode.HALF_EVEN);
     }
 }
