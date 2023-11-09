@@ -1,8 +1,10 @@
 package mirand.lucas.wexpurchasescontrol.dto;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import mirand.lucas.wexpurchasescontrol.annotations.DecimalPlaces;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,10 +14,14 @@ import java.time.LocalDate;
  */
 public class PurchaseDTO {
     @Size(max = 50)
+    @NotNull(message = "description cannot be null")
     private String description;
     @Past
+    @NotNull(message = "transactionDate cannot be null")
     private LocalDate transactionDate;
     @Positive
+    @NotNull(message = "purchaseAmountUSD cannot be null")
+    @DecimalPlaces(value = 2, message = "purchaseAmountUSD must be a valid positive amount rounded to the nearest cent.")
     private BigDecimal purchaseAmountUSD;
 
     public String getDescription() {
