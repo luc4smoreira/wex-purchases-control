@@ -5,7 +5,6 @@ import mirand.lucas.wexpurchasescontrol.dto.ExchangeRateDataDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangeRateResponseDTO;
 import mirand.lucas.wexpurchasescontrol.model.services.CurrencyExchangeRateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,9 +22,10 @@ public class TreasureGovExchangeRateServiceImp implements CurrencyExchangeRateSe
 
 
     private final RestTemplate restTemplate;
+
     @Autowired
-    public TreasureGovExchangeRateServiceImp(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
+    public TreasureGovExchangeRateServiceImp(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     private URI buildExchangeRateUrl(String country, String currency, DateIntervalDTO intervalDTO) {

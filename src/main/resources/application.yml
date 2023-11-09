@@ -1,0 +1,7 @@
+
+connections:
+  external:
+    connect:
+      timeout_seconds: 5
+    read:
+      timeout_seconds: 5
