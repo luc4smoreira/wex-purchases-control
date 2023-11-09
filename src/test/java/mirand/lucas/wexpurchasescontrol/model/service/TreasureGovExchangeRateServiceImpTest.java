@@ -7,6 +7,7 @@ import jakarta.validation.ValidatorFactory;
 import mirand.lucas.wexpurchasescontrol.dto.DateIntervalDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangeRateDataDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangeRateResponseDTO;
+import mirand.lucas.wexpurchasescontrol.model.services.CurrencyExchangeRateService;
 import mirand.lucas.wexpurchasescontrol.model.services.imp.TreasureGovExchangeRateServiceImp;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,7 @@ public class TreasureGovExchangeRateServiceImpTest {
     @Mock
     private RestTemplate restTemplate;
 
-    private TreasureGovExchangeRateServiceImp service;
+    private CurrencyExchangeRateService service;
 
 
     @BeforeEach
