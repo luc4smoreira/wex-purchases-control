@@ -47,9 +47,7 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
     @Override
     public ExchangedPurchaseDTO getPurchaseByIdInCurrency(final Long id, final String country, final String currency) throws CurrencyExchangeNotAvailableException, PurchaseNotFoundException {
         //first, get the purchase from database
-        PurchaseTransaction storedPurchase = purchaseRepository.getReferenceById(id);
-
-
+        PurchaseTransaction storedPurchase = purchaseRepository.findById(id).orElseThrow(PurchaseNotFoundException::new);
 
         ExchangedPurchaseDTO exchangedPurchaseDTO = PurchaseObjectsConverter.fromEntity(storedPurchase);
 
