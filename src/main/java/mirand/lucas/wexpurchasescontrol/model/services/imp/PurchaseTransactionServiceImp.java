@@ -55,6 +55,10 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
         if(country != null && currency!=null) {
             //get the exchange rate for the defined country and currency using am acceptable interval for this rate
             BigDecimal rate = currencyExchangeRateService.getNewestExchangeRateInInterval(country, currency, dateIntervalDTO);
+            if(rate==null) {
+                //If no currency conversion rate is available within 6 months equal to or before the purchase date, an error should be returned stating the purchase cannot be converted to the target currency.
+                throw new CurrencyExchangeNotAvailableException();
+            }
 
             //set the exchage rate
             exchangedPurchaseDTO.setExchangeRate(rate);
