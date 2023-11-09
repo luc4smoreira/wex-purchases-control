@@ -84,7 +84,7 @@ public class TreasureGovExchangeRateServiceImpTest {
     @Test
     public void testGetNewestExchangeRateInIntervalReturnSuccessfull() {
 
-        BigDecimal expected = new BigDecimal(1.42);
+        BigDecimal expected = new BigDecimal("1.42");
         // Configurar o mock do RestTemplate para retornar um resultado esperado
         ExchangeRateResponseDTO exchangeRateResponseDTO = new ExchangeRateResponseDTO();
 
