@@ -1,5 +1,6 @@
 package mirand.lucas.wexpurchasescontrol.model.services;
 
+import jakarta.validation.constraints.NotNull;
 import mirand.lucas.wexpurchasescontrol.dto.PurchaseDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangedPurchaseDTO;
 import mirand.lucas.wexpurchasescontrol.exceptions.CurrencyExchangeNotAvailableException;
@@ -28,7 +29,7 @@ public interface PurchaseTransactionService {
      * @throws CurrencyExchangeNotAvailableException the currency exchange rate is not avaliable for some reason
      * @throws PurchaseNotFoundException  the purchase id wasn´t found in the database
      */
-    ExchangedPurchaseDTO getPurchaseByIdInCurrency(final Long id, String country, final String currency) throws CurrencyExchangeNotAvailableException, PurchaseNotFoundException;
+    ExchangedPurchaseDTO getPurchaseByIdInCurrency(@NotNull final Long id, String country, final String currency) throws CurrencyExchangeNotAvailableException, PurchaseNotFoundException;
 
 
     /**

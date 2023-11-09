@@ -1,6 +1,7 @@
 package mirand.lucas.wexpurchasescontrol.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import mirand.lucas.wexpurchasescontrol.dto.PurchaseDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangedPurchaseDTO;
 import mirand.lucas.wexpurchasescontrol.model.services.PurchaseTransactionService;
@@ -26,7 +27,7 @@ public class PurchaseTransactionController {
     }
 
     @GetMapping("/get")
-    public ExchangedPurchaseDTO getPurchase(@RequestParam(value = "id") Long id, @RequestParam(value = "country") String country, @RequestParam(value = "currency") String currency) {
+    public ExchangedPurchaseDTO getPurchase(@RequestParam(value = "id") @NotNull Long id, @RequestParam(value = "country") String country, @RequestParam(value = "currency") String currency) {
         //TODO If no currency conversion rate is available within 6 months equal to or before the purchase date, an error should be returned stating the purchase cannot be converted to the target currency.
         return purchaseService.getPurchaseByIdInCurrency(id, country, currency);
 

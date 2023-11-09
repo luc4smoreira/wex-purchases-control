@@ -12,3 +12,6 @@ To avoid issues related to rounding, the purchase transaction validation expects
 ### 2. Spring and Microservices
 
 The choice to use the Spring framework and Spring Boot is due to their robustness and industry-standard status in Java backend development. They simplify the process by bundling the project and its dependencies into a single executable file, thus enhancing reliability and modularity. This setup is ideal for deploying scalable microservices and ensures seamless integration with tools such as Docker and Kubernetes.
+
+
+### 3. Allow get Purchase by id only 

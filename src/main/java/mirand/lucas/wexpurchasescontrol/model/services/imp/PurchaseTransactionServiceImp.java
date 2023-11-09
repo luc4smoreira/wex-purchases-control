@@ -15,15 +15,15 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 @Service
-public class PurcahseTransactionServiceImp implements PurchaseTransactionService {
+public class PurchaseTransactionServiceImp implements PurchaseTransactionService {
 
-
+    private static final int TOTAL_DECIMALS_FOR_CENTS = 2;
     private final CurrencyExchangeRateService currencyExchangeRateService;
 
     private final PurchaseRepository purchaseRepository;
 
     @Autowired
-    public PurcahseTransactionServiceImp(PurchaseRepository purchaseRepository, CurrencyExchangeRateService currencyExchangeRateService) {
+    public PurchaseTransactionServiceImp(PurchaseRepository purchaseRepository, CurrencyExchangeRateService currencyExchangeRateService) {
         this.purchaseRepository = purchaseRepository;
         this.currencyExchangeRateService = currencyExchangeRateService;
 
@@ -47,21 +47,22 @@ public class PurcahseTransactionServiceImp implements PurchaseTransactionService
         //first, get the purchase from database
         PurchaseTransaction storedPurchase = purchaseRepository.getReferenceById(id);
 
-        //than, get the date interval to get the currency
+        //then, get the date interval to get the currency
         DateIntervalDTO dateIntervalDTO = currencyExchangeRateService.generateAcceptableInterval(storedPurchase.getTransactionDate());
-
-        //get the exchange rate for the defined country and currency using am acceptable interval for this rate
-        BigDecimal rate = currencyExchangeRateService.getNewestExchangeRateInInterval(country, currency, dateIntervalDTO);
-
 
         ExchangedPurchaseDTO exchangedPurchaseDTO = PurchaseObjectsConverter.fromEntity(storedPurchase);
 
-        //set the exchage rate
-        exchangedPurchaseDTO.setExchangeRate(rate);
+        if(country != null && currency!=null) {
+            //get the exchange rate for the defined country and currency using am acceptable interval for this rate
+            BigDecimal rate = currencyExchangeRateService.getNewestExchangeRateInInterval(country, currency, dateIntervalDTO);
 
-        BigDecimal exchanged = exchangeAndRoundAmount(storedPurchase.getPurchaseAmount(), rate);
+            //set the exchage rate
+            exchangedPurchaseDTO.setExchangeRate(rate);
 
-        exchangedPurchaseDTO.setConvertedAmout(exchanged);
+            BigDecimal exchanged = exchangeAndRoundAmount(storedPurchase.getPurchaseAmount(), rate);
+
+            exchangedPurchaseDTO.setConvertedAmout(exchanged);
+        }
 
 
         return exchangedPurchaseDTO;
@@ -70,8 +71,7 @@ public class PurcahseTransactionServiceImp implements PurchaseTransactionService
 
     @Override
     public BigDecimal exchangeAndRoundAmount(BigDecimal amount, BigDecimal exchangeRate) {
-        //TODO The converted purchase amount to the target currency should be rounded to two decimal places (i.e., cent).
-        return amount.multiply(exchangeRate);
-       //return amount.multiply(exchangeRate).setScale(TOTAL_DECIMALS_FOR_CENTS, RoundingMode.UP); FIXME
+       //TODO The converted purchase amount to the target currency should be rounded to two decimal places (i.e., cent).
+       return amount.multiply(exchangeRate);
     }
 }
