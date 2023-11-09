@@ -13,7 +13,7 @@ public class ExchangedPurchaseDTO extends PurchaseDTO {
     @Positive
     private BigDecimal exchangeRate;
     @Positive
-    private BigDecimal convertedAmout;
+    private BigDecimal convertedAmount;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class ExchangedPurchaseDTO extends PurchaseDTO {
         this.exchangeRate = exchangeRate;
     }
 
-    public BigDecimal getConvertedAmout() {
-        return convertedAmout;
+    public BigDecimal getConvertedAmount() {
+        return convertedAmount;
     }
 
-    public void setConvertedAmout(BigDecimal convertedAmout) {
-        this.convertedAmout = convertedAmout;
+    public void setConvertedAmount(BigDecimal convertedAmount) {
+        this.convertedAmount = convertedAmount;
     }
 }

@@ -17,8 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,8 +37,8 @@ public class PurchaseTransactionServiceImpTest {
 
     @Test
     public void testExchangeAndRoundAmountBellow() {
-        BigDecimal amount = new BigDecimal(2.52);
-        BigDecimal rate = new BigDecimal(5.033);
+        BigDecimal amount = new BigDecimal("2.52");
+        BigDecimal rate = new BigDecimal("5.033");
         BigDecimal expectedRounded =  new BigDecimal("12.68"); //12.68316
 
         BigDecimal resultRounded = service.exchangeAndRoundAmount(amount, rate);
@@ -49,8 +48,8 @@ public class PurchaseTransactionServiceImpTest {
 
     @Test
     public void testExchangeAndRoundAmountAbove() {
-        BigDecimal amount = new BigDecimal(2.53);
-        BigDecimal rate = new BigDecimal(5.034);
+        BigDecimal amount = new BigDecimal("2.53");
+        BigDecimal rate = new BigDecimal("5.034");
         BigDecimal expectedRounded =  new BigDecimal("12.74"); //12.73602
 
         BigDecimal resultRounded = service.exchangeAndRoundAmount(amount, rate);
@@ -86,7 +85,7 @@ public class PurchaseTransactionServiceImpTest {
         Assertions.assertEquals(description, result.getDescription());
         Assertions.assertEquals(purchaseAmount, result.getPurchaseAmountUSD());
         Assertions.assertEquals(null, result.getExchangeRate());
-        Assertions.assertEquals(null, result.getConvertedAmout());
+        Assertions.assertEquals(null, result.getConvertedAmount());
     }
 
 
@@ -148,6 +147,6 @@ public class PurchaseTransactionServiceImpTest {
 
 
         BigDecimal converted = service.exchangeAndRoundAmount(result.getPurchaseAmountUSD(), result.getExchangeRate());
-        Assertions.assertEquals(converted, result.getConvertedAmout());
+        Assertions.assertEquals(converted, result.getConvertedAmount());
     }
 }

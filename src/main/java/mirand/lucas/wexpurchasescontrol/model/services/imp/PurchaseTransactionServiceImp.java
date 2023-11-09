@@ -70,7 +70,7 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
 
             BigDecimal exchanged = exchangeAndRoundAmount(storedPurchase.getPurchaseAmountUSD(), rate);
 
-            exchangedPurchaseDTO.setConvertedAmout(exchanged);
+            exchangedPurchaseDTO.setConvertedAmount(exchanged);
         }
 
 
