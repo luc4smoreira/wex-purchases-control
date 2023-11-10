@@ -10,6 +10,8 @@ import mirand.lucas.wexpurchasescontrol.model.entity.PurchaseTransaction;
 import mirand.lucas.wexpurchasescontrol.model.repository.PurchaseRepository;
 import mirand.lucas.wexpurchasescontrol.model.services.CurrencyExchangeRateService;
 import mirand.lucas.wexpurchasescontrol.model.services.PurchaseTransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import java.math.RoundingMode;
 
 @Service
 public class PurchaseTransactionServiceImp implements PurchaseTransactionService {
+
+    private static final Logger logger = LoggerFactory.getLogger(PurchaseTransactionServiceImp.class);
 
     private static final int TOTAL_DECIMALS_FOR_CENTS = 2;
     private final CurrencyExchangeRateService currencyExchangeRateService;
@@ -60,6 +64,7 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
             BigDecimal rate = currencyExchangeRateService.getNewestExchangeRateInInterval(country, currency, dateIntervalDTO);
             if(rate==null) {
                 //If no currency conversion rate is available within 6 months equal to or before the purchase date, an error should be returned stating the purchase cannot be converted to the target currency.
+                logger.debug(String.format("CurrencyExchangeNotAvailableException country: %s, currency: %s, interval-start: %s, internval-end:%s", country, currency, dateIntervalDTO.getStart().toString(), dateIntervalDTO.getEnd().toString()));
                 throw new CurrencyExchangeNotAvailableException();
             }
 

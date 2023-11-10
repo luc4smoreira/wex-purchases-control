@@ -33,7 +33,7 @@ public class ProdConfig {
         return new DefaultErrorAttributes() {
             @Override
             public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
-                //remove stack trace
+                //remove stack trace, do not expose error information in production
                 options = options.excluding(ErrorAttributeOptions.Include.STACK_TRACE, ErrorAttributeOptions.Include.BINDING_ERRORS);
 
                 return super.getErrorAttributes(webRequest, options);

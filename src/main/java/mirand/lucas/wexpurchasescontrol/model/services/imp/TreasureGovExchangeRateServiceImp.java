@@ -4,6 +4,8 @@ import mirand.lucas.wexpurchasescontrol.dto.DateIntervalDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangeRateDataDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangeRateResponseDTO;
 import mirand.lucas.wexpurchasescontrol.model.services.CurrencyExchangeRateService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +18,7 @@ import java.time.LocalDate;
 @Service
 public class TreasureGovExchangeRateServiceImp implements CurrencyExchangeRateService {
 
+    private static final Logger logger = LoggerFactory.getLogger(TreasureGovExchangeRateServiceImp.class);
 
     private static final int MAX_EXCHANGE_RATE_ACCEPTABLE_IN_MONTHS = 6;
     private static final String BASE_URL = "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange";
@@ -43,11 +46,15 @@ public class TreasureGovExchangeRateServiceImp implements CurrencyExchangeRateSe
         BigDecimal exchangeRate = null;
 
         URI url = buildExchangeRateUrl(country, currency, intervalDTO);
+        logger.debug(String.format("Exchange Rate API URL: %s", url));
 
         ExchangeRateResponseDTO response = restTemplate.getForObject(url, ExchangeRateResponseDTO.class);
         if (response != null && response.getData() != null && !response.getData().isEmpty()) {
             ExchangeRateDataDTO exchangeRateDataDTO = response.getData().get(0);
             exchangeRate = exchangeRateDataDTO.getExchangeRate();
+        }
+        else {
+            logger.debug(String.format("Result empty for url: %s", url));
         }
         return exchangeRate;
     }
