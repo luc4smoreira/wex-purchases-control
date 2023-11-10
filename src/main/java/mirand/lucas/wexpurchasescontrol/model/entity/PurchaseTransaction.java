@@ -19,12 +19,12 @@ import java.time.LocalDate;
 @Entity
 public class PurchaseTransaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
     private LocalDate transactionDate;
-    private BigDecimal purchaseAmountUSD;
+    private BigDecimal purchaseAmountUsd;
 
     public String getDescription() {
         return description;
@@ -42,12 +42,12 @@ public class PurchaseTransaction {
         this.transactionDate = transactionDate;
     }
 
-    public BigDecimal getPurchaseAmountUSD() {
-        return purchaseAmountUSD;
+    public BigDecimal getPurchaseAmountUsd() {
+        return purchaseAmountUsd;
     }
 
-    public void setPurchaseAmountUSD(BigDecimal purchaseAmount) {
-        this.purchaseAmountUSD = purchaseAmount;
+    public void setPurchaseAmountUsd(BigDecimal purchaseAmount) {
+        this.purchaseAmountUsd = purchaseAmount;
     }
 
     public Long getId() {

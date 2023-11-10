@@ -69,7 +69,7 @@ public class PurchaseTransactionServiceImpTest {
         purchaseTransaction.setId(id);
         purchaseTransaction.setTransactionDate(transactionDate);
         purchaseTransaction.setDescription(description);
-        purchaseTransaction.setPurchaseAmountUSD(purchaseAmount);
+        purchaseTransaction.setPurchaseAmountUsd(purchaseAmount);
 
         when(purchaseRepository.findById(id)).thenReturn(Optional.of(purchaseTransaction));
 
@@ -104,7 +104,7 @@ public class PurchaseTransactionServiceImpTest {
         purchaseTransaction.setId(id);
         purchaseTransaction.setTransactionDate(transactionDate);
         purchaseTransaction.setDescription(description);
-        purchaseTransaction.setPurchaseAmountUSD(purchaseAmount);
+        purchaseTransaction.setPurchaseAmountUsd(purchaseAmount);
 
         when(purchaseRepository.findById(id)).thenReturn(Optional.of(purchaseTransaction));
 
