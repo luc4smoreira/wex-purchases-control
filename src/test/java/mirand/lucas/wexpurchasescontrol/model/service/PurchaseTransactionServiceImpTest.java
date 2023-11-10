@@ -3,7 +3,7 @@ package mirand.lucas.wexpurchasescontrol.model.service;
 import mirand.lucas.wexpurchasescontrol.dto.DateIntervalDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangedPurchaseDTO;
 import mirand.lucas.wexpurchasescontrol.model.entity.PurchaseTransaction;
-import mirand.lucas.wexpurchasescontrol.model.repository.PurchaseRepository;
+import mirand.lucas.wexpurchasescontrol.model.dao.PurchaseDAO;
 import mirand.lucas.wexpurchasescontrol.model.services.CurrencyExchangeRateService;
 import mirand.lucas.wexpurchasescontrol.model.services.PurchaseTransactionService;
 import mirand.lucas.wexpurchasescontrol.model.services.imp.PurchaseTransactionServiceImp;
@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -26,14 +25,14 @@ public class PurchaseTransactionServiceImpTest {
     private static final String COUNTRY_BRAZIL = "Brazil";
     private static final String CURRENCY_REAL = "Real";
     @Mock
-    private PurchaseRepository purchaseRepository;
+    private PurchaseDAO purchaseDAO;
     @Mock
     private CurrencyExchangeRateService currencyExchangeRateService;
     private PurchaseTransactionService service;
 
     @BeforeEach
     void setUp() {
-        service = new PurchaseTransactionServiceImp(purchaseRepository, currencyExchangeRateService);
+        service = new PurchaseTransactionServiceImp(purchaseDAO, currencyExchangeRateService);
     }
 
     @Test
@@ -71,7 +70,7 @@ public class PurchaseTransactionServiceImpTest {
         purchaseTransaction.setDescription(description);
         purchaseTransaction.setPurchaseAmountUsd(purchaseAmount);
 
-        when(purchaseRepository.findById(id)).thenReturn(Optional.of(purchaseTransaction));
+        when(purchaseDAO.findPurchaseById(id)).thenReturn(purchaseTransaction);
 
 
 //        when(currencyExchangeRateService.generateAcceptableInterval(any())).thenReturn(null);
@@ -106,7 +105,7 @@ public class PurchaseTransactionServiceImpTest {
         purchaseTransaction.setDescription(description);
         purchaseTransaction.setPurchaseAmountUsd(purchaseAmount);
 
-        when(purchaseRepository.findById(id)).thenReturn(Optional.of(purchaseTransaction));
+        when(purchaseDAO.findPurchaseById(id)).thenReturn(purchaseTransaction);
 
         DateIntervalDTO dateIntervalDTO = new DateIntervalDTO();
         dateIntervalDTO.setStart(transactionDate.minusMonths(6));

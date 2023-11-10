@@ -10,7 +10,7 @@ spring:
     password: "miranda"
   jpa:
     hibernate:
-      ddl-auto: "update"
+      ddl-auto: none
 
 connections:
   external:

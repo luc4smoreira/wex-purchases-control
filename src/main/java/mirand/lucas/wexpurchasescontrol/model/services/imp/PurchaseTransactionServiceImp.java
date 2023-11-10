@@ -7,7 +7,7 @@ import mirand.lucas.wexpurchasescontrol.exceptions.CurrencyExchangeNotAvailableE
 import mirand.lucas.wexpurchasescontrol.exceptions.PurchaseNotFoundException;
 import mirand.lucas.wexpurchasescontrol.model.converter.PurchaseObjectsConverter;
 import mirand.lucas.wexpurchasescontrol.model.entity.PurchaseTransaction;
-import mirand.lucas.wexpurchasescontrol.model.repository.PurchaseRepository;
+import mirand.lucas.wexpurchasescontrol.model.dao.PurchaseDAO;
 import mirand.lucas.wexpurchasescontrol.model.services.CurrencyExchangeRateService;
 import mirand.lucas.wexpurchasescontrol.model.services.PurchaseTransactionService;
 import org.slf4j.Logger;
@@ -26,11 +26,11 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
     private static final int TOTAL_DECIMALS_FOR_CENTS = 2;
     private final CurrencyExchangeRateService currencyExchangeRateService;
 
-    private final PurchaseRepository purchaseRepository;
+    private final PurchaseDAO purchaseDAO;
 
     @Autowired
-    public PurchaseTransactionServiceImp(PurchaseRepository purchaseRepository, CurrencyExchangeRateService currencyExchangeRateService) {
-        this.purchaseRepository = purchaseRepository;
+    public PurchaseTransactionServiceImp(PurchaseDAO purchaseDAO, CurrencyExchangeRateService currencyExchangeRateService) {
+        this.purchaseDAO = purchaseDAO;
         this.currencyExchangeRateService = currencyExchangeRateService;
 
     }
@@ -41,7 +41,7 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
     @Override
     public Long storePurchase(PurchaseDTO purchaseDTO) {
         PurchaseTransaction purchaseTransaction = PurchaseObjectsConverter.toEntity(purchaseDTO);
-        purchaseRepository.save(purchaseTransaction);
+        purchaseDAO.insertPurchase(purchaseTransaction);
         return purchaseTransaction.getId();
     }
 
@@ -51,7 +51,10 @@ public class PurchaseTransactionServiceImp implements PurchaseTransactionService
     @Override
     public ExchangedPurchaseDTO getPurchaseByIdInCurrency(final Long id, final String country, final String currency) throws CurrencyExchangeNotAvailableException, PurchaseNotFoundException {
         //first, get the purchase from database
-        PurchaseTransaction storedPurchase = purchaseRepository.findById(id).orElseThrow(PurchaseNotFoundException::new);
+        PurchaseTransaction storedPurchase = purchaseDAO.findPurchaseById(id);
+        if(storedPurchase==null) {
+            throw new PurchaseNotFoundException();
+        }
 
         ExchangedPurchaseDTO exchangedPurchaseDTO = PurchaseObjectsConverter.fromEntity(storedPurchase);
 
