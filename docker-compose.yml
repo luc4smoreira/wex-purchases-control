@@ -3,8 +3,8 @@ services:
     image: "mysql:8.2.0"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      timeout: 20s
-      retries: 2
+      timeout: 5s
+      retries: 10
     ports:
       - "3306:3306"
     environment:
