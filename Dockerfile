@@ -1,8 +1,8 @@
-# Use JDK 20
-FROM openjdk:20-jdk as build
+# Use amazon JDK correto version 20
+FROM maven:3.9-amazoncorretto-20 as build
 
-# Copie o jar do seu aplicativo para a imagem
+# Copy jar application to the image
 COPY target/wex-purchases-control-*.jar wex-purchases-control.jar
 
-# Comando para executar a aplicação
+# run application
 ENTRYPOINT ["java", "-jar", "/wex-purchases-control.jar"]
