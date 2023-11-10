@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -70,7 +71,7 @@ public class PurchaseTransactionServiceImpTest {
         purchaseTransaction.setDescription(description);
         purchaseTransaction.setPurchaseAmountUSD(purchaseAmount);
 
-        when(purchaseRepository.getReferenceById(id)).thenReturn(purchaseTransaction);
+        when(purchaseRepository.findById(id)).thenReturn(Optional.of(purchaseTransaction));
 
 
 //        when(currencyExchangeRateService.generateAcceptableInterval(any())).thenReturn(null);
@@ -105,7 +106,7 @@ public class PurchaseTransactionServiceImpTest {
         purchaseTransaction.setDescription(description);
         purchaseTransaction.setPurchaseAmountUSD(purchaseAmount);
 
-        when(purchaseRepository.getReferenceById(id)).thenReturn(purchaseTransaction);
+        when(purchaseRepository.findById(id)).thenReturn(Optional.of(purchaseTransaction));
 
         DateIntervalDTO dateIntervalDTO = new DateIntervalDTO();
         dateIntervalDTO.setStart(transactionDate.minusMonths(6));
