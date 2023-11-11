@@ -1,13 +1,15 @@
-
+server:
+  servlet:
+    context-path: "/wex-purchases-control"
 
 spring:
   profiles:
-    active: "dev"
+    active: "prod" # dev (expose interval information stacktrace, errors details) / prod
   datasource:
-    url: "jdbc:mysql://localhost:3306/wex-purchases-db"
+    url: "jdbc:mysql://localhost:3306/${MYSQLDB_DATABASE}"
     driver-class-name: "com.mysql.cj.jdbc.Driver"
-    username: "lucas"
-    password: "miranda"
+    username: "${MYSQLDB_USER}"
+    password: "${MYSQLDB_PASSWORD}"
   jpa:
     hibernate:
       ddl-auto: none
