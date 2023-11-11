@@ -1,0 +1,20 @@
+server:
+  servlet:
+    context-path: "/wex-purchases-control"
+
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:${MYSQLDB_PORT}/${MYSQLDB_DATABASE}"
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    username: "${MYSQLDB_USERNAME}"
+    password: "${MYSQLDB_PASSWORD}"
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+connections:
+  external:
+    connect:
+      timeout_seconds: 5
+    read:
+      timeout_seconds: 5

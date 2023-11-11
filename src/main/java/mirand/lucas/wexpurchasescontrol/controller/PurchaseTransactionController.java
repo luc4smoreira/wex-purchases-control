@@ -39,20 +39,21 @@ public class PurchaseTransactionController {
             @RequestParam(value = "country", required = false) String country,
             @RequestParam(value = "currency", required = false) String currency) {
 
-
+        ResponseEntity<?> responseEntity;
         try {
             ExchangedPurchaseDTO exchangedPurchaseDTO = purchaseService.getPurchaseByIdInCurrency(id, country, currency);
-            return new ResponseEntity<>(exchangedPurchaseDTO, HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(exchangedPurchaseDTO, HttpStatus.OK);
         }
         catch (CurrencyExchangeNotAvailableException e) {
             logger.info(String.format("Currency exchange not available for params. id: %d, country: %s, currency: %s", id, country, currency));
-            return new ResponseEntity<>("The purchase cannot be converted to the target currency. To access only the original purchase transaction, leave the country and currency fields empty.", HttpStatus.NOT_FOUND);
+            responseEntity = new ResponseEntity<>("The purchase cannot be converted to the target currency. To access only the original purchase transaction, leave the country and currency fields empty.", HttpStatus.NOT_FOUND);
         }
         catch (PurchaseNotFoundException e) {
             logger.info(String.format("Purchase not found. id: %d", id));
-            return new ResponseEntity<>("Purchase not found.", HttpStatus.NOT_FOUND);
+            responseEntity = new ResponseEntity<>("Purchase not found.", HttpStatus.NOT_FOUND);
         }
 
+        return responseEntity;
     }
 
 }
