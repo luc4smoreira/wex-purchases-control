@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * Purchase information
  */
 public class PurchaseDTO {
-    @Size(max = 50)
+    @Size(min = 1, max = 50)
     @NotNull(message = "description cannot be null")
     private String description;
     @Past
