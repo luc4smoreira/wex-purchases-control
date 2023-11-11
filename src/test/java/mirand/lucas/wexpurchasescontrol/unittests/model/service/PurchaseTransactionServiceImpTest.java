@@ -1,4 +1,4 @@
-package mirand.lucas.wexpurchasescontrol.model.service;
+package mirand.lucas.wexpurchasescontrol.unittests.model.service;
 
 import mirand.lucas.wexpurchasescontrol.dto.DateIntervalDTO;
 import mirand.lucas.wexpurchasescontrol.dto.ExchangedPurchaseDTO;

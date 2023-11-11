@@ -1,4 +1,4 @@
-package mirand.lucas.wexpurchasescontrol.model.service;
+package mirand.lucas.wexpurchasescontrol.unittests.model.service;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
