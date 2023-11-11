@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class PurchaseDAO implements RowMapper<PurchaseTransaction> {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Transactional
     public void insertPurchase(PurchaseTransaction purchase) {
         final String sql = "INSERT INTO purchase_transaction (description, purchase_amount_usd, transaction_date) VALUES (?, ?, ?)";
 
@@ -44,6 +46,7 @@ public class PurchaseDAO implements RowMapper<PurchaseTransaction> {
         // Obtém o ID gerado
         purchase.setId(keyHolder.getKey().longValue());
     }
+
 
     public PurchaseTransaction findPurchaseById(Long id) {
         String sql = "SELECT id, description, purchase_amount_usd, transaction_date FROM purchase_transaction WHERE id = ?";
