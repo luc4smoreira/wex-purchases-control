@@ -35,8 +35,8 @@ Here is an example JSON file:
 
 When a purchase is recorded, a unique identifier is generated and sent in the service response. This number is needed to query a recorded purchase. The HTTP request must use the GET method for the URL <i>/wex-purchases-control/get</i> In addition to this identifier, the following are also required:
 - <b>id:</b> Purchase identifier.
-- (opcional) <b>country:</b> Country associated with a given exchange rate.
-- (opcional) <b>currency:</b> Currency associated with a given exchange rate.
+- (optional) <b>country:</b> Country associated with a given exchange rate.
+- (optional) <b>currency:</b> Currency associated with a given exchange rate.
 
 Note: The values of Country and Currency must correspond to the names used by the Treasury Reporting Rates of Exchange API. If Country and Currency are not defined, the purchase value is returned without conversion to a specific currency.
 
