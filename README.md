@@ -159,9 +159,9 @@ APP_EXTERNAL_PORT=8080
 
 1) <b>Kubernetes Environment Setup:</b> Ensure that you have a properly configured Kubernetes environment ready for deployment. This includes having Kubernetes and kubectl installed and a running Kubernetes cluster (like Minikube for local setups or a cloud-based Kubernetes service)
 
-2) <b>Build project JAR with MAVEN:</b> Ensure you have the file /wex-purchases-control/app/target/wex-purchases-control-1.0.0.jar
+2) <b>Building the Project JAR File:</b>Ensure that you have the JAR file created by Maven at <b>/wex-purchases-control/app/target/wex-purchases-control-1.0.0.jar</b> You can build it using the following Maven command: 
 ```
-MAVEN command ./mvnw -f app/pom.xml clean package
+./mvnw -f app/pom.xml clean package
 ```
 3) <b>Building the Docker Image:</b> In the /wex-purchases-control/app/ folder, build the Docker image of the application with the following command. This command creates a Docker image from your application, tagging it as v1.0.
 ```
@@ -185,6 +185,7 @@ kubectl apply -f kubernetes/app-deployment.yml
 
 ### Testing:
 
+To test the deployed application, use the following CURL commands:
 #### Send a Record
 
 ```
