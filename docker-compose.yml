@@ -15,7 +15,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
   app:
-    build: .
+    build: ./app
     ports:
       - "${APP_DOCKER_PORT}:${APP_EXTERNAL_PORT}"
     depends_on:
