@@ -16,6 +16,7 @@ spring:
 
 connections:
   external:
+    base_url: "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange"
     connect:
       timeout_seconds: 5
     read:

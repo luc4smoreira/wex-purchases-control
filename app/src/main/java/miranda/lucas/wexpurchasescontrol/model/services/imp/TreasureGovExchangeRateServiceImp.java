@@ -7,6 +7,7 @@ import miranda.lucas.wexpurchasescontrol.model.services.CurrencyExchangeRateServ
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,7 +22,9 @@ public class TreasureGovExchangeRateServiceImp implements CurrencyExchangeRateSe
     private static final Logger logger = LoggerFactory.getLogger(TreasureGovExchangeRateServiceImp.class);
 
     private static final int MAX_EXCHANGE_RATE_ACCEPTABLE_IN_MONTHS = 6;
-    private static final String BASE_URL = "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange";
+
+    @Value("${connections.external.base_url}")
+    private String baseUrl;
 
 
     private final RestTemplate restTemplate;
@@ -32,7 +35,7 @@ public class TreasureGovExchangeRateServiceImp implements CurrencyExchangeRateSe
     }
 
     private URI buildExchangeRateUrl(String country, String currency, DateIntervalDTO intervalDTO) {
-        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+        return UriComponentsBuilder.fromHttpUrl(baseUrl)
                 .queryParam("filter", String.format("record_date:lte:%s,record_date:gte:%s,country:eq:%s,currency:eq:%s", intervalDTO.getEnd(), intervalDTO.getStart(), country, currency))
                 .queryParam("fields", "record_date,country,currency,exchange_rate")
                 .queryParam("sort", "-record_date")

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
@@ -42,6 +43,7 @@ public class TreasureGovExchangeRateServiceImpTest {
     @BeforeEach
     void setUp() {
         service = new TreasureGovExchangeRateServiceImp(restTemplate);
+        ReflectionTestUtils.setField(service, "baseUrl", "https://test.url");
     }
 
 
