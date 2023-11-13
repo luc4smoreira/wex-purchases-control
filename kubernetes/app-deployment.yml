@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wex-purchases-control-app
+spec:
+  selector:
+    app: wex-purchases-control-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wex-purchases-control-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wex-purchases-control-app
+  template:
+    metadata:
+      labels:
+        app: wex-purchases-control-app
+    spec:
+      containers:
+        - name: wex-purchases-control-app
+          image: wex-purchases-control-app:v1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql:3306/wex-purchases-db
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQLDB_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQLDB_PASSWORD
