@@ -87,7 +87,7 @@ There are numerous advantages to using Docker, worth mentioning the main ones:
 Configurations were created to allow the application to be published using Kubernetes, which offers automatic scalability and efficient container management, optimizing the deployment and operation of large-scale distributed applications.
 
 
-### Testes de unidade e integração
+### Unit and Integration Tests
 Unit Tests and Integration Tests were developed. The integration tests were carried out using <b>SpringBootTest</b>, <b>Spring MockMvc</b>, and the <b>org.testcontainers</b> library for MySQL. This way, it is possible to test the integration of the project with both the Treasury Reporting Rates of Exchange API and the database access.
 
 
