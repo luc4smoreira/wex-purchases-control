@@ -110,7 +110,11 @@ To execute the integration tests, it is necessary to run the MAVEN command:
 
 To avoid issues related to rounding, the purchase transaction validation expects the monetary values to be already rounded.
 
+Therefore, the monetary values received as input must have a maximum of two decimal places. The monetary values converted to a specific currency by the application are converted to a value with two decimal places, as described in the specification:
 
+```
+The converted purchase amount to the target currency should be rounded to two decimal places (i.e., cent).
+```
 ### 2. Allow get Purchase by id only 
 
 Allow retrieval of the purchase only in the original USD value. This way, it is possible to verify if the purchase was recorded correctly and not depend on the external API for a query.
@@ -177,7 +181,7 @@ APP_EXTERNAL_PORT=8080
 ```
 3) <b>Building the Docker Image:</b> Build the Docker image of the application with the following command. This command creates a Docker image from your application, tagging it as v1.1.
 
-In the <b>/wex-purchases-control/app/ folder</b>
+In the <b>/wex-purchases-control/app/</b>folder
 ```
 docker build -t wex-purchases-control-app:v1.1 .
 ```
@@ -201,7 +205,7 @@ kubectl apply -f kubernetes/app-deployment.yml
 
 ### Testing:
 
-To test the deployed application, use the following CURL commands:
+To test the deployed application, use the following example CURL commands (this example uses <i>localhost</i>):
 #### Send a Record
 
 ```
