@@ -73,7 +73,7 @@ The decision to use SQL was made for greater control over persisted data. This d
 Thus, the project uses a MySQL relational database.
 
 
-### Docker e Docker Compose
+### Docker and Docker Compose
 
 There are numerous advantages to using Docker, worth mentioning the main ones:
 - Consistency of Environments: Same environment for development, testing, and production, reducing compatibility issues.
@@ -89,6 +89,18 @@ Configurations were created to allow the application to be published using Kuber
 
 ### Unit and Integration Tests
 Unit Tests and Integration Tests were developed. The integration tests were carried out using <b>SpringBootTest</b>, <b>Spring MockMvc</b>, and the <b>org.testcontainers</b> library for MySQL. This way, it is possible to test the integration of the project with both the Treasury Reporting Rates of Exchange API and the database access.
+
+Unit tests are executed when generating the package but can be run independently using the MAVEN command:
+
+```
+./mvnw -f app/pom.xml test
+```
+
+To execute the integration tests, it is necessary to run the MAVEN command:
+```
+./mvnw -f app/pom.xml verify
+```
+
 
 
 ## List of Decisions Made
