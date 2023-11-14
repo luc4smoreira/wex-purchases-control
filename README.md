@@ -132,7 +132,7 @@ Initially, it is necessary to compile the project's jar package. Maven is includ
 ./mvnw -f app/pom.xml clean package
 ```
 
-Ensure that at the end of the process you have the file: /wex-purchases-control/app/target/wex-purchases-control-1.0.0.jar
+Ensure that at the end of the process you have the file: /wex-purchases-control/app/target/wex-purchases-control-1.1.0.jar
 
 ### Executing the Application Independently
 
@@ -149,7 +149,7 @@ However, this will not be the recommended way to publish the application and is 
 
 With Docker Compose, it is possible to launch the application along with MySQL in a multi-container. Command to start the application using Docker Compose:
 
-1) Ensure you have Docker configured, such as Docker Desktop or an appropriate environment. Make sure you have the file /wex-purchases-control/app/target/wex-purchases-control-1.0.0.jar (MAVEN command ./mvnw -f app/pom.xml clean package)
+1) Ensure you have Docker configured, such as Docker Desktop or an appropriate environment. Make sure you have the file /wex-purchases-control/app/target/wex-purchases-control-1.1.0.jar (MAVEN command ./mvnw -f app/pom.xml clean package)
 2) Configure the .env file using the .env.example file as a reference
 3) In the project root folder, execute the command: docker-compose up
 4) The docker-compose configuration dictates that the database needs to be accessible before starting the application. Therefore, it may be necessary to wait a few additional seconds for the wex-purchases-control-app to start
@@ -171,20 +171,24 @@ APP_EXTERNAL_PORT=8080
 
 1) <b>Kubernetes Environment Setup:</b> Ensure that you have a properly configured Kubernetes environment ready for deployment. This includes having Kubernetes and kubectl installed and a running Kubernetes cluster (like Minikube for local setups or a cloud-based Kubernetes service)
 
-2) <b>Building the Project JAR File:</b>Ensure that you have the JAR file created by Maven at <b>/wex-purchases-control/app/target/wex-purchases-control-1.0.0.jar</b> You can build it using the following Maven command: 
+2) <b>Building the Project JAR File:</b>Ensure that you have the JAR file created by Maven at <b>/wex-purchases-control/app/target/wex-purchases-control-1.1.0.jar</b> You can build it using the following Maven command: 
 ```
 ./mvnw -f app/pom.xml clean package
 ```
-3) <b>Building the Docker Image:</b> In the /wex-purchases-control/app/ folder, build the Docker image of the application with the following command. This command creates a Docker image from your application, tagging it as v1.0.
+3) <b>Building the Docker Image:</b> Build the Docker image of the application with the following command. This command creates a Docker image from your application, tagging it as v1.1.
+
+In the <b>/wex-purchases-control/app/ folder</b>
 ```
-docker build -t wex-purchases-control-app:v1.0 .
+docker build -t wex-purchases-control-app:v1.1 .
 ```
 4) <b>Creating Kubernetes Secrets:</b> Create Kubernetes Secrets for storing database access credentials. Secrets in Kubernetes are used to securely store and manage sensitive data like usernames, passwords, and database credentials.
    Example:
 ```
 kubectl create secret generic mysql-secret --from-literal=MYSQLDB_USER=lucas --from-literal=MYSQLDB_PASSWORD=miranda --from-literal=MYSQLDB_ROOT_PASSWORD=lucas.miranda
 ```
-5) <b>Deploying the MySQL Database:</b> Return to the <i>/wex-purchases-control/</i> root folder. Deploy the MySQL database using the <b>mysql-deployment.yml</b> file. This file contains the configuration for setting up a MySQL database in your Kubernetes cluster.
+5) <b>Deploying the MySQL Database:</b>  Deploy the MySQL database using the <b>mysql-deployment.yml</b> file. This file contains the configuration for setting up a MySQL database in your Kubernetes cluster.
+
+ Return to the <i>/wex-purchases-control/</i> root folder.
 ```
 kubectl apply -f kubernetes/mysql-deployment.yml
 ``` 

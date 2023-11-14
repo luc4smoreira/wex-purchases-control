@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: wex-purchases-control-app
-          image: wex-purchases-control-app:v1.0
+          image: wex-purchases-control-app:v1.1
           ports:
             - containerPort: 8080
           livenessProbe:
