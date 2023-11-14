@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: wex-purchases-control-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: wex-purchases-control-app
@@ -32,6 +32,18 @@ spec:
           image: wex-purchases-control-app:v1.0
           ports:
             - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /wex-purchases-control/actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /wex-purchases-control/actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysql:3306/wex-purchases-db

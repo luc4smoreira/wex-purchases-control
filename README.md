@@ -184,7 +184,7 @@ docker build -t wex-purchases-control-app:v1.0 .
 ```
 kubectl create secret generic mysql-secret --from-literal=MYSQLDB_USER=lucas --from-literal=MYSQLDB_PASSWORD=miranda --from-literal=MYSQLDB_ROOT_PASSWORD=lucas.miranda
 ```
-5) <b>Deploying the MySQL Database:</b> Deploy the MySQL database using the <b>mysql-deployment.yml</b> file. This file contains the configuration for setting up a MySQL database in your Kubernetes cluster.
+5) <b>Deploying the MySQL Database:</b> Return to the <i>/wex-purchases-control/</i> root folder. Deploy the MySQL database using the <b>mysql-deployment.yml</b> file. This file contains the configuration for setting up a MySQL database in your Kubernetes cluster.
 ```
 kubectl apply -f kubernetes/mysql-deployment.yml
 ``` 

@@ -1,7 +1,11 @@
 server:
   servlet:
     context-path: "/wex-purchases-control"
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
 spring:
   profiles:
     active: "prod" # dev (expose interval information stacktrace, errors details) / prod
